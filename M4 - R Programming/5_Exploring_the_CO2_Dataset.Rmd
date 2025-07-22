@@ -1,0 +1,71 @@
+---
+title: "Exploring the CO2 Dataset"
+author: "Ken Wood"
+date: "2024-10-06"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Objective:
+
+In this assignment, you will apply basic statistical analysis techniques using the R programming language on the CO2 dataset (make sure you use the CO2 dataset and not the co2 dataset, they are different). This dataset details CO2 uptake in grass plants under different environmental conditions. Your tasks will include data exploration, visualization, hypothesis testing with a t-test, and examining correlations.
+
+Data Overview: 
+
+The CO2 dataset contains observations from an experiment on the cold tolerance of the grass species Echinochloa crus-galli. Variables include treatment types, CO2 uptake, concentration, temperature, and more. This rich dataset allows for comprehensive statistical analysis.
+
+Instructions: 
+
+In your own R script file, please complete the following tasks:
+
+- Data Exploration: Familiarize yourself with the dataset using the head() and summary() functions in R.
+
+```{r}
+# Load the datasets package (usually not necessary as it's loaded by default)
+library(datasets)
+
+# Import the CO2 dataset
+data(CO2)
+
+# Display the first few rows of the dataset
+head(CO2)
+
+# Get a set of summary stats for the dataset
+summary(CO2)
+```
+Data Visualization: Create visualizations to understand the distributions and relationships in the data:
+
+```{r}
+# Create a histogram
+hist(CO2$conc, 
+     main="Histogram of CO2$conc",
+     xlab="conc Value",
+     ylab="Frequency",
+     col="blue",
+     border="black")
+
+# Create a histogram
+hist(CO2$uptake, 
+     main="Histogram of CO2$uptake",
+     xlab="conc Value",
+     ylab="Frequency",
+     col="blue",
+     border="black")
+```
+
+
+t-Test: Conduct a t-test to compare the mean CO2 uptake between two treatment groups. Clearly state your hypothesis, perform the test, and interpret the results.
+Correlation Analysis: Calculate and interpret the correlation coefficients between CO2 uptake and other numeric variables in the dataset.
+
+```{r}
+t_test_results <- t.test(uptake ~ Treatment, data = CO2,
+                         var.equal = FALSE)
+print(t_test_results)
+```
+
+```{r}
+cor(CO2$uptake,CO2$conc)
+```
+
+

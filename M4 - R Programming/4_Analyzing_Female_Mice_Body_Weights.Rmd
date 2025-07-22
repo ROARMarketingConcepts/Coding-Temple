@@ -1,0 +1,114 @@
+---
+title: "Analyzing Female Mice Body Weights"
+author: "Ken Wood"
+date: "2024-10-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+### Objective: 
+
+Your mission is to use R to analyze the body weights of female mice on different diets. You'll apply statistical measures to understand trends and variations in the data.
+
+### Data Overview: 
+
+The dataset you'll be working with is about the body weights of female mice on different diets. The .csv file is attached to this assignment. The dataset contains two columns:
+
+1.	Diet: This column indicates the type of diet each mouse was on. For example, it might be 'chow' or other specific diet types.
+
+2.	Bodyweight: This column shows the bodyweight of each mouse in grams.
+
+### Instructions
+
+1.	Central Tendencies of Body Weights
+
+- Goal: Discover key central tendencies in the body weights of the mice.
+- Task: Calculate the mean, median, and mode for the body weights.
+
+Action:
+```{r}
+# Load the dataset into R.
+
+df <- read.csv('female-mice-weights.csv')
+df
+```
+
+```{r}
+
+# Apply mean(), median(), and a custom function to find the mode for the Bodyweight column.
+
+avg_bodyweight <- mean(df$Bodyweight)
+avg_bodyweight
+
+median_bodyweight <- median(df$Bodyweight)
+median_bodyweight
+
+# Mode function
+mode_function <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+mode_bodyweight <- mode_function(df$Bodyweight)
+mode_bodyweight
+
+# Reflection: Write about which measure (mean, median, or mode) you think best represents the bodyweights and why.
+```
+
+2.	Understanding Body Weight Variability
+
+- Goal: Explore the variability in the body weights across all diets.
+- Task: Calculate the range, variance, and standard deviation for the body weights.
+
+Action:
+```{r}
+# Use R’s range(), var(), and sd() functions on the Bodyweight column.
+
+range_bodyweight <- range(df$Bodyweight)
+range_bodyweight
+
+var_bodyweight <- var(df$Bodyweight)
+var_bodyweight
+
+sd_bodyweight <- sd(df$Bodyweight)
+sd_bodyweight
+
+# Reflection: Discuss what these measures tell you about the spread of body weights.
+```
+
+
+3.	Overall Data Summary
+
+- Goal: Gain a comprehensive statistical overview of the dataset.
+- Task: Use the summary() function in R.
+
+Action:
+
+
+
+```{r}
+# Run summary() on the entire dataset.
+
+summary(df)
+
+# Reflection: Highlight any standout points from the summary, such as differences in weight across diets.
+```
+4.	Diet Comparison
+	
+- Goal: Compare body weights across different diets.
+- Task: Group the data by diet and calculate the average bodyweight for each diet group.
+
+Action:
+```{r}
+
+# Utilize the dplyr package to group data and calculate mean body weights.
+
+library(dplyr)
+df %>% group_by(Diet) %>% summarise(mean_bodyweight = mean(Bodyweight))
+
+# Reflection: Share insights on how diet might influence bodyweight based on your findings.
+```
+
+
+

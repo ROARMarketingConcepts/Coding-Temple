@@ -1,0 +1,76 @@
+---
+title: "Exploring the mtcars Dataset"
+author: "Ken Wood"
+date: "2024-10-05"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+#### Overview: 
+
+In this assignment, you will dive into the world of automotive data using the `mtcars` dataset available in the ggplot2 package. Similar to our previous lesson where we explored the preloaded diamonds dataset, you will apply various data manipulation and visualization techniques to uncover insights and analyze automotive trends.
+
+Data Overview: 
+
+The mtcars dataset contains data on various automobile models, including attributes such as miles per gallon (mpg), number of cylinders (cyl), engine displacement (disp), horsepower (hp), and more.
+To learn more about the dataset, including a data dictionary, you can use the following R command: `?mtcars`.
+
+```{r}
+# Load the datasets package (usually not necessary as it's loaded by default)
+library(datasets)
+# Import the mtcars dataset
+data(mtcars)
+# Display the first few rows of the dataset
+head(mtcars)
+```
+
+1.	Selecting Columns:
+Use the select() function to choose only the columns mpg, cyl, disp, hp, and drat. Save the resulting dataframe as selected_cars.
+```{r}
+library(dplyr)
+
+selected_cars <- mtcars %>% select(mpg, cyl, disp, hp, drat)
+selected_cars
+```
+
+2.	Filtering Data:
+Filter the mtcars dataset to include only cars with more than 150 horsepower (hp). Save the filtered dataframe as high_hp_cars.
+
+```{r}
+high_hp_cars <- mtcars %>% filter(mtcars$hp > 150)
+high_hp_cars
+```
+
+3.	Arranging Data:
+Arrange the high_hp_cars dataframe in descending order of miles per gallon (mpg). Save the arranged dataframe as sorted_cars.
+
+```{r}
+sorted_cars <- high_hp_cars %>% sort_by(high_hp_cars$mpg,decreasing=TRUE)
+sorted_cars
+```
+
+4.	Using the Pipe Operator (%>%):
+
+Rewrite the previous tasks using the pipe operator (%>%) to create a streamlined workflow.
+
+
+5.	Adding a New Column:
+
+Use the mutate() function to create a new column named mileage_category in the mtcars dataset. Classify cars with mpg greater than or equal to 20 as "High Mileage" and others as "Low Mileage".
+```{r}
+# Use mutate to create a new column mileage_category
+mtcars <- mtcars %>%
+  mutate(mileage_category = ifelse(mpg >= 20, "High Mileage", "Low Mileage"))
+
+mtcars
+```
+
+6.	Grouping and Summarizing:
+
+Group the mtcars dataset by the number of cylinders (cyl) and summarize the average horsepower (hp) for each cylinder category.
+```{r}
+grouped_data <- mtcars %>% group_by(cyl) %>% summarize(avg_hp = mean(hp))
+grouped_data
+```
+

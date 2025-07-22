@@ -1,0 +1,22 @@
+---
+title: "Stacked Bar Charts"
+author: "Ken Wood"
+date: "2024-12-13"
+output: html_document
+---
+
+```{r}
+library(datasets)
+library(ggplot2)
+library(tidyverse)
+
+data(mtcars)
+head(mtcars)
+```
+
+```{r cars}
+
+ggplot(mtcars, aes(x = factor(cyl),fill = factor(gear))) + 
+ geom_bar() +
+  labs(x = "Number of Cylinders", fill = "Number of Gears")
+```

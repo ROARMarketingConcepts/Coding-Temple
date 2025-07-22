@@ -1,0 +1,99 @@
+---
+title: "EDA with ggplot2 on mtcars Dataset"
+author: "Ken Wood"
+date: "2024-11-24"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Objective: 
+
+This assignment aims to guide you through exploratory data analysis (EDA) using the ggplot2 package in R, focusing on the mtcars dataset. By completing this assignment, you will enhance your proficiency in visualization.
+
+Data Overview: 
+
+The mtcars dataset comprises various automobile characteristics such as miles per gallon (mpg), number of cylinders (cyl), horsepower (hp), and other performance metrics.
+
+Instructions: 
+
+ In your own R script file, please complete the following tasks:
+ 
+1. Select the mtcars dataset for analysis.
+2. Perform EDA to comprehend the dataset's structure and characteristics thoroughly.
+3. Identify continuous and discrete variables within the mtcars dataset.
+4. Create insightful visualizations using ggplot2 to uncover patterns and relationships within the data.
+
+```{r}
+# Load the datasets package (usually not necessary as it's loaded by default)
+library(datasets)
+library(ggplot2)
+
+# Import the mtcars dataset
+data(mtcars)
+
+# Display the first few rows of the dataset
+head(mtcars)
+
+# Get a set of summary stats for the dataset
+summary(mtcars)
+```
+Data Visualization: 
+
+1.	Histograms or density plots to visualize the distribution of continuous variables (mpg, hp, etc.).
+
+```{r}
+
+# Create a histogram
+ggplot(mtcars, aes(x=mpg)) + 
+  geom_histogram(color = "black", fill = "steelblue", binwidth = 1) +
+  labs(x = "MPG", y = "Frequency") +
+  ggtitle("Histogram of MPG") +
+  theme_minimal()
+
+# Create a histogram
+ggplot(mtcars, aes(x=wt)) + 
+  geom_histogram(color = "black", fill = "steelblue", binwidth = 0.1) +
+  labs(x = "Weight", y = "Frequency") +
+  ggtitle("Histogram of Weight") +
+  theme_minimal()
+```
+2.	Bar plots to display the frequency of discrete variables (number of cylinders, gear type).
+
+```{r}
+ggplot(mtcars, aes(x = factor(cyl))) + 
+  geom_bar(color = "black", fill = "steelblue") + 
+  labs(title = "Frequency of Number of Cylinders", x = "Number of Cylinders", y = "Count") + theme_minimal()
+
+ggplot(mtcars, aes(x = factor(gear))) + 
+  geom_bar(color = "black", fill = "steelblue") + 
+  labs(title = "Frequency of Gear Type", x = "Gear Type", y = "Count") + theme_minimal()
+```
+
+3.	Scatter plots to explore relationships between two continuous variables.
+
+```{r}
+ggplot(mtcars, aes(x = hp, y = mpg)) + 
+  geom_point(color = "steelblue") + 
+  labs(title = "Scatter Plot of MPG vs Horsepower", x = "Horsepower", y = "Miles Per Gallon (MPG)") + theme_minimal()
+```
+
+4.	Box plots or violin plots to compare the distribution of a continuous variable across different levels of a categorical variable (e.g., cylinders).
+
+```{r}
+
+# Create a boxplot
+ggplot(data=mtcars, aes(x=factor(cyl), y=mpg)) +
+  geom_boxplot(color = "black", fill = "steelblue")  +
+  labs(x = "num_cylinders", y = "MPG") +
+  ggtitle("Boxplot of MPG vs. Number of Cylinders") +
+  theme_minimal()
+
+# Create a boxplot
+ggplot(data=mtcars,aes(x=factor(cyl), y=disp)) +
+  geom_boxplot(color = "black", fill = "steelblue") +
+  labs(x = "num_cylinders", y = "disp") +
+  ggtitle("Boxplot of disp vs. Number of Cylinders") +
+  theme_minimal()
+```
+
